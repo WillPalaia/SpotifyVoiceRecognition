@@ -54,8 +54,18 @@ class Functions:
     def search_song(self, title, artist):
         song = self.spotify.search(title + ' ' + artist, limit=1, offset=0, type='track', market=None)
         return song['tracks']['items'][0]['uri'][14::]
+    
+    def search_album(self, title, artist):
+        album = self.spotify.search(title + ' ' + artist, limit=1, offset=0, type='album', market=None)
+        return album['albums']['items'][0]['uri'][14::]
+    
+    def search_artist(self, artist):
+        self.artist = self.spotify.search(artist, limit=1, offset=0, type='artist', market=None)
+        return self.artist['artists']['items'][0]['name']#[14::]
         
 
 
 test = Functions()
-print(test.search_song('HUMBLE', 'Kendrick Lamar'))
+print(test.search_album('Graduation', 'Kanye West'))
+print(test.search_song('Money Trees', 'Kendrick Lamar'))
+print(test.search_artist('Taylor Swift'))
