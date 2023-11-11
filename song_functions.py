@@ -58,4 +58,4 @@ class Functions:
 
 
 test = Functions()
-print(test.search_song('Money Trees', 'Kendrick Lamar'))
+print(test.search_song('HUMBLE', 'Kendrick Lamar'))
