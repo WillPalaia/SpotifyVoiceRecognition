@@ -1,5 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from main import *
 
 class Functions:
     def __init__(self) -> None:
@@ -33,6 +34,12 @@ class Functions:
         devices = self.spotify.devices()
         for device in devices['devices']:
             self.spotify.next_track(device['id'])
+
+    def addtoqueue_spotify(self):
+        devices = self.spotify.devices()
+        for device in devices['devices']:
+            uri = get_track_uri(spotify=spotify, name=name)
+            self.spotify.add_to_queue(uri, device['id'])
 
 
 
