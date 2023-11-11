@@ -4,6 +4,11 @@ import base64
 from requests import post
 import json
 
+"""
+CLIENT_ID = "5d3a61ce96b245adaf521468e1b8ed55"
+CLIENT_SECRET = "af2ea7921189463abfe526725b9ea465"
+"""
+
 load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
