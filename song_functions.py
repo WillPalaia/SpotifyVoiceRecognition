@@ -35,11 +35,11 @@ class Functions:
         for device in devices['devices']:
             self.spotify.next_track(device['id'])
 
-    def addtoqueue_spotify(self, name, artist):
+    def addtoqueue_spotify(self, title, artist):
         devices = self.spotify.devices()
+        song = self.search_song(title, artist)
         for device in devices['devices']:
-            uri = get_track_uri(spotify=self.spotify, name=name)
-            self.spotify.add_to_queue(uri, device['id'])
+            self.spotify.add_to_queue(song, device['id'])
     
     def rewind_spotify(self):
         devices = self.spotify.devices()
