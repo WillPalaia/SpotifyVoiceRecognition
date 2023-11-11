@@ -1,13 +1,15 @@
 import requests
 from pprint import pprint
+import os
 
 # curl --request GET \
 # 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V' \
 #  --header "Authorization: Bearer NgCXRK...MzYjw"
-
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+url = requests.get('https://api.spotify.com/v1/tracks/4MXhiYIRDMGAuvZc5IFTwC')
 SPOTIFY_GET_CURRENT_TRACK_URL ='https://api.spotify.com/v1/me/player/currently-playing'
-SPOTIFY_ACCESS_TOKEN = '5d3a61ce96b245adaf521468e1b8ed55'
-
+SPOTIFY_ACCESS_TOKEN = 'BQDK-9zMXzx6zYhsfNk51ekTNJmUTJa_rVIpsK5-8vm5t0UnOILftHXwt2-pGmr0GzJvBsey4Sbdk8UjHi9VUo7ms4JcV37w8r8Cv8pz0PeFgc-qAjQPS'
 def get_current_track(access_token):
   response = requests.get(
     SPOTIFY_GET_CURRENT_TRACK_URL,
@@ -39,3 +41,5 @@ def main():
 
 if __name__ == '__main__':
   main()
+
+id = '432nZryWppNwMDWo1a1p6l'

@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import base64
-from requests import post
+from requests import post, get
 import json
 
 """
@@ -31,5 +31,16 @@ def get_token():
     token = json_result["access_token"]
     return token
 
+def get_auth_header(token):
+    return {"Authorization": "Bearer " + token}
+
+def currently_playing(token):
+    url = "https://api.spotify.com/v1/me/player/currently-playing"
+    headers = get_auth_header(token)
+    result = get(url, headers=headers)
+    json_result = json.loads(result.content)
+    print(result)
+    
+
 token = get_token()
-print(token)
+currently_playing(token)

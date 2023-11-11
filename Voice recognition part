@@ -20,12 +20,15 @@ while True:
     #pause
     if text[0] == "pause":
         #doing pause command idk bruv
+        pass
     
     if text[0] == "next":
         #go to the next song
+        pass
     
     if text[0] == "previous":
         #go to the previous song
+        pass
         
     if text[0] == "play":
         if text[1] == "album":
@@ -35,5 +38,7 @@ while True:
             song_name = text[1:]
             if not song_name:
                 #continue current song
+                pass
             else:
                 #play the song
+                pass
