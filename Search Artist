@@ -1,0 +1,41 @@
+import requests
+from pprint import pprint
+
+# curl --request GET \
+# 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V' \
+#  --header "Authorization: Bearer NgCXRK...MzYjw"
+
+SPOTIFY_GET_CURRENT_TRACK_URL ='https://api.spotify.com/v1/me/player/currently-playing'
+SPOTIFY_ACCESS_TOKEN = '5d3a61ce96b245adaf521468e1b8ed55'
+
+def get_current_track(access_token):
+  response = requests.get(
+    SPOTIFY_GET_CURRENT_TRACK_URL,
+    headers={
+      'Authorization': f"Bearer {access_token}"
+    }
+  )
+  
+  resp_json = response.json()
+  track_id = resp_json['item']['id']
+  track_name = resp_json['item']['name']
+  artists = resp_json['item']['artists']
+  track_artist = ", ".join([artist["name"] for artist in artists])
+  track_link = resp_json['item']['external_urls']['spotify']
+  
+  
+  current_track_info = {
+    "id": track_id,
+    "name": track_name,
+    "artist": track_artist,
+    "link": track_link
+  }
+
+  return current_track_info 
+
+def main():
+  current_track_info  = get_current_track(SPOTIFY_ACCESS_TOKEN)
+  pprint(current_track_info, indent=4)
+
+if __name__ == '__main__':
+  main()
