@@ -1,6 +1,5 @@
 import requests
 import datetime
-import geocoder
 import time
 import os
 import spotipy
