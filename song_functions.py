@@ -1,40 +1,41 @@
-import requests
-import datetime
-import geocoder
-import time
-import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-# Set your Spotify app credentials (client ID and client secret)
-client_id = '5d3a61ce96b245adaf521468e1b8ed55'
-client_secret = 'af2ea7921189463abfe526725b9ea465'
-redirect_uri = 'http://localhost:3000' # my demo use http://localhost:3000/callback
+class Functions:
+    def __init__(self) -> None:
+        self.client_id = '5d3a61ce96b245adaf521468e1b8ed55'
+        self.client_secret = 'af2ea7921189463abfe526725b9ea465'
+        self.redirect_uri = 'http://localhost:3000'
+        self.SCOPEs = ['app-remote-control', 'user-read-playback-state', 'user-modify-playback-state']
+        self.auth_manager = SpotifyOAuth(
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            redirect_uri=self.redirect_uri,
+            scope=self.SCOPEs,
+            username='tocarmeli'
+        )
 
-# scopes for Remote control playback, Get Available Devices, Pause playback
-SCOPEs = ['app-remote-control', 'user-read-playback-state', 'user-modify-playback-state']
-auth_manager = SpotifyOAuth(
-    client_id=client_id,
-    client_secret=client_secret,
-    redirect_uri=redirect_uri,
-    scope=SCOPEs,
-    username='tocarmeli'
-)
-spotify = spotipy.Spotify(auth_manager=auth_manager)
+        self.spotify = spotipy.Spotify(auth_manager=self.auth_manager)
+    
+    def pause_spotify(self):
+        devices = self.spotify.devices()
+        for device in devices['devices']:
+            #if device['is_active']:
+            self.spotify.pause_playback(device['id'])
 
-def pause_spotify():
-    devices = spotify.devices()
-    for device in devices['devices']:
-        if device['is_active']:
-            spotify.pause_playback(device['id'])
-
-def resume_spotify():
-    devices = spotify.devices()
-    print(devices)
-    for device in devices['devices']:
-        if device['is_active']:
-            spotify.start_playback(device['id'])
+    def resume_spotify(self):
+        devices = self.spotify.devices()
+        print(devices)
+        for device in devices['devices']:
+            #if device['is_active']:
+            self.spotify.start_playback(device['id'])
 
 
+    def skip_spotify(self):
+        devices = self.spotify.devices()
+        for device in devices['devices']:
+            self.spotify.next_track(device['id'])
 
-resume_spotify()
+
+test = Functions()
+test.pause_spotify()
