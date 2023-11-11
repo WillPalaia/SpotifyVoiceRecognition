@@ -1,0 +1,39 @@
+from vosk import Model, KaldiRecognizer
+
+import pyaudio
+
+model = Model(r"C:\Hackathon")
+recogizer = KaldiRecognizer(model, 16000)
+
+mic = pyaudio.PyAudio()
+stream = mic.open(rate = 16000, channels = 1, format = pyaudio.paFloat32, input = True, input_device_index = None,  frames_per_buffer = 8192)
+
+stream.start_stream()
+
+#could be when open Spotify
+while True:
+    data = stream.read(4096, False)
+    if recogizer.AcceptWaveform(data):
+        text = recogizer.Result()
+        print(text)
+
+    #pause
+    if text[0] == "pause":
+        #doing pause command idk bruv
+    
+    if text[0] == "next":
+        #go to the next song
+    
+    if text[0] == "previous":
+        #go to the previous song
+        
+    if text[0] == "play":
+        if text[1] == "album":
+            album_num = text[2:]
+            #play_album
+        else:
+            song_name = text[1:]
+            if not song_name:
+                #continue current song
+            else:
+                #play the song
