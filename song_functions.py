@@ -30,6 +30,7 @@ def pause_spotify():
 
 def resume_spotify():
     devices = spotify.devices()
+    print(devices)
     for device in devices['devices']:
         if device['is_active']:
             spotify.start_playback(device['id'])
