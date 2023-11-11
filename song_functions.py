@@ -40,7 +40,15 @@ class Functions:
         for device in devices['devices']:
             uri = get_track_uri(spotify=spotify, name=name)
             self.spotify.add_to_queue(uri, device['id'])
+    def rewind_spotify():
+        devices = spotify.devices()
+        for device in devices:
+            if device['is_active']:
+                self.spotify.previous_track(device['id'])
 
+    def replay_song():
+        rewind_spotify()
+        skip_spotify()
 
 
 test = Functions()
