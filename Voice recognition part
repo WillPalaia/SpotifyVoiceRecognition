@@ -28,12 +28,15 @@ while True:
             play_artist(spotify=spotify, device_id=deviceID, uri=uri)
     if text[0] == "pause":
         #doing pause command idk bruv
+        pass
     
     if text[0] == "next":
         #go to the next song
+        pass
     
     if text[0] == "previous":
         #go to the previous song
+        pass
         
     if text[0] == "play":
         if text[1] == "album":
@@ -45,6 +48,7 @@ while True:
             song_name = text[1:]
             if not song_name:
                 #continue current song
+                pass
                 uri = continue_current_song(spotify=spotify, name=name)
                 play_current(spotify=spotify, device_id=deviceID, uri=uri)
             else:
