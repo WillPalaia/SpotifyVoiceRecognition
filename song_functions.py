@@ -20,14 +20,12 @@ class Functions:
     def pause_spotify(self):
         devices = self.spotify.devices()
         for device in devices['devices']:
-            #if device['is_active']:
             self.spotify.pause_playback(device['id'])
 
     def resume_spotify(self):
         devices = self.spotify.devices()
         print(devices)
         for device in devices['devices']:
-            #if device['is_active']:
             self.spotify.start_playback(device['id'])
 
 
@@ -35,6 +33,7 @@ class Functions:
         devices = self.spotify.devices()
         for device in devices['devices']:
             self.spotify.next_track(device['id'])
+
 
 
 test = Functions()
