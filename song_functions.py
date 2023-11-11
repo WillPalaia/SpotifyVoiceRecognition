@@ -35,21 +35,27 @@ class Functions:
         for device in devices['devices']:
             self.spotify.next_track(device['id'])
 
-    def addtoqueue_spotify(self):
+    def addtoqueue_spotify(self, name, artist):
         devices = self.spotify.devices()
         for device in devices['devices']:
-            uri = get_track_uri(spotify=spotify, name=name)
+            uri = get_track_uri(spotify=self.spotify, name=name)
             self.spotify.add_to_queue(uri, device['id'])
-    def rewind_spotify():
-        devices = spotify.devices()
+    
+    def rewind_spotify(self):
+        devices = self.spotify.devices()
         for device in devices:
             if device['is_active']:
                 self.spotify.previous_track(device['id'])
 
-    def replay_song():
-        rewind_spotify()
-        skip_spotify()
+    def replay_song(self):
+        self.rewind_spotify()
+        self.skip_spotify()
+
+    def search_song(self, title, artist):
+        song = self.spotify.search(title + ' ' + artist, limit=1, offset=0, type='track', market=None)
+        return song['tracks']['items'][0]['uri'][14::]
+        
 
 
 test = Functions()
-test.pause_spotify()
+print(test.search_song('Money Trees', 'Kendrick Lamar'))
