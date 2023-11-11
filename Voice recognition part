@@ -1,6 +1,7 @@
 from vosk import Model, KaldiRecognizer
 
 import pyaudio
+from main import *
 
 model = Model(r"C:\Hackathon")
 recogizer = KaldiRecognizer(model, 16000)
@@ -16,8 +17,15 @@ while True:
     if recogizer.AcceptWaveform(data):
         text = recogizer.Result()
         print(text)
+    words = text.split()
+    if len(words) <= 1:
+        print('Please try again')
+        continue
 
     #pause
+    if text[0] == "artist":
+            uri = get_artist_uri(spotify=spotify, name=name)
+            play_artist(spotify=spotify, device_id=deviceID, uri=uri)
     if text[0] == "pause":
         #doing pause command idk bruv
     
@@ -31,9 +39,17 @@ while True:
         if text[1] == "album":
             album_num = text[2:]
             #play_album
+            uri = get_album_uri(spotify=spotify, name=name)
+            play_album(spotify=spotify, device_id=deviceID, uri=uri)
         else:
             song_name = text[1:]
             if not song_name:
                 #continue current song
+                uri = continue_current_song(spotify=spotify, name=name)
+                play_current(spotify=spotify, device_id=deviceID, uri=uri)
             else:
                 #play the song
+                uri = get_track_uri(spotify=spotify, name=name)
+                play_track(spotify=spotify, device_id=deviceID, uri=uri)
+    else:
+        print('say either "pause", "next", "previous", "play", or "play album"')
