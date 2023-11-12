@@ -77,8 +77,3 @@ class Functions:
             for device in devices['devices']:
                 if device['is_active']:
                     self.spotify.start_playback(device_id = device['id'], context_uri = c_uri)
-
-test = Functions()
-print(test.search_album('Graduation', 'Kanye West'))
-print(test.search_song('Money Trees', 'Kendrick Lamar'))
-print(test.search_artist('Taylor Swift'))
