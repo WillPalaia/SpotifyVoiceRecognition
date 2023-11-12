@@ -63,7 +63,20 @@ class Functions:
         self.artist = self.spotify.search(artist, limit=1, offset=0, type='artist', market=None)
         return self.artist['artists']['items'][0]['name']#[14::]
         
-
+    def play(self, uri, play_type):
+        
+        if play_type == 'song':
+            uris = [f'spotify:track:{uri}']
+            devices = self.spotify.devices()
+            for device in devices['devices']:
+                if device['is_active']:
+                    self.spotify.start_playback(device_id = device['id'], uris = uris)
+        if play_type == 'album':
+            c_uri = f'spotify:album:{uri}'
+            devices = self.spotify.devices()
+            for device in devices['devices']:
+                if device['is_active']:
+                    self.spotify.start_playback(device_id = device['id'], context_uri = c_uri)
 
 test = Functions()
 print(test.search_album('Graduation', 'Kanye West'))
