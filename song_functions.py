@@ -1,11 +1,12 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from main import *
+import os
 
 class Functions:
     def __init__(self) -> None:
-        self.client_id = '5d3a61ce96b245adaf521468e1b8ed55'
-        self.client_secret = 'af2ea7921189463abfe526725b9ea465'
+        self.client_id = os.getenv('CLIENT_ID')
+        self.client_secret = os.getenv('CLIENT_SECRET')
         self.redirect_uri = 'http://localhost:3000'
         self.SCOPEs = ['app-remote-control', 'user-read-playback-state', 'user-modify-playback-state']
         self.auth_manager = SpotifyOAuth(
